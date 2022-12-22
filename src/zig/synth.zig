@@ -129,6 +129,9 @@ export fn sfxBuffer(u8Array: [*]u8, u8ArrayLength: usize, sampleRate: u32, songN
         if (periods_at_note >= period_per_note) {
             periods_at_note = 0;
             song_index += 1;
+            if (song_index >= chosenSongLength) {
+                song_index = 0;
+            }
             previous_note_amplitude = note.waveform[previous_note_period];
             note = getNote(song_index, chosenSong, chosenSongLength);
             samples_per_wave = samplesPerWave(note, sampleRate);
