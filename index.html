@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple Zig Synthesizer (WebAssembly)</title>
+    <link rel="icon" type="image/x-icon" href="src/html/images/favicon.ico">
+    <link rel="stylesheet" href="src/html/css/style.css"></link>
+  </head>
+  <body>
+    <main>
+      <ol>
+	<li><label for="playback-hz">Playback hz</label><input id="playback-hz" type="number" value="44100"></input></li>
+	<li><label for="seconds-length">Length in seconds (whole number)</label><input id="seconds-length" type="number" value="2"></input></li>
+	<li>
+	  <label for="notes-to-play">Round robin note hz list</label>
+	  <input id="notes-to-play" aria-describedby="notes-to-play-describe" pattern="(\d+\s*,\s*)+" value="247, 262, 277, 294, 311, 330, 349, 370, 247, 262, 277, 294, 311, 330, 349, 370, 247, 262, 277, 294, 311, 330, 349, 370, 247, 262, 277, 294, 311, 330, 349, 370, 247, 262, 277, 294, 311, 330, 349, 370, 247, 262, 277, 294, 311, 330, 349, 370, 247, 262"></input>
+	  <p id="notes-to-play-describe">comma separated 16 bit hz values, can be between 1 and 65535</p>
+	</li>
+	<li>
+	  <label for="bug-length">Bug length</label>
+	  <input id="bug-length" aria-describedby="bug-length-describe" type="number" value="1"></input>
+	  <p id="bug-length-describe">amount of samples to insert 0 at when the bug occurs</p>
+	</li>
+      </ol>
+      <pre id="output"></pre>
+      <ul id="warning">
+	<li>Sound is back to sounding kinda bad, don't use headphones</li>
+	<li>You can, press the button multiple times in quick succession.</li>
+      </ul>
+      <!-- 
+https://github.com/gaycodegal/wave-generator/blob/main/third-party/wave/wavefile.js 
+not included in release, just used for testing to allow downloading
+the generated wave forms for visual inspection -->
+      <script src="src/html/js/wavefile.js"></script>
+      
+      <script src="src/html/js/webassembly.js"></script>
+      <script src="src/html/js/synth-loader.js"></script>
+      <script src="src/html/js/play-audio.js"></script>
+      <button onclick="main()" aria-describedby="warning">play a sound</button>
+      <br>
+      <button onclick="parseConstants(downloadWav)">download as .wav file</button>      
+    </main>
+    <footer>
+      <p>
+	some open source code was used as a part of this project.
+	legally, you these two licenses need to be distributed with the project.
+      </p>
+      <p>
+	the majority of this project was written by "gaycodegal" at https://github.com/gaycodegal/simple-zig-wasm-synthesizer . 
+	mit license
+      </p>
+      <a href="license-wavefile_js.md">wavefile saver js license</a>
+      <a href="license-tic80.md">tic80 license</a>
+      </footer>
+  </body>
+</html>
